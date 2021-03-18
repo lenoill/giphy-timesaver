@@ -1,23 +1,30 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="main.js" defer></script>
+    <script src="main.js" defer type="module"></script>
+    <!-- <script type="text/javascript" src="./jszip.js"></script> -->
+   
     <link rel="stylesheet" href="style.css">
     <title>Download giphy</title>
 </head>
+
 <body>
     <input type="file" id="file-input" />
     <button id="show-content">Show content</button>
     <button id="check">Check gifs</button>
-    <div><p>Input links</p>
+    <div>
+        <p>Input links</p>
         <div id="file-contents"></div>
     </div>
-    <div><p>Gifs to check</p>
+    <div>
+        <p>Gifs to check</p>
         <div id="gif-check"></div>
     </div>
     <button id="download">download</button>
 </body>
+
 </html>

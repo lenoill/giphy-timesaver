@@ -1,3 +1,4 @@
+
 let text;
 document.querySelector("#show-content").addEventListener("click", function () {
   let file = document.querySelector("#file-input").files[0];
@@ -17,12 +18,14 @@ document.querySelector("#show-content").addEventListener("click", function () {
   isClicked("#show-content");
 });
 let clicked2 = false;
-let newLinks;
+let newLinks = new Array();
 document.querySelector("#check").addEventListener("click", () => {
   const arrLinks = text.split("\n");
-    newLinks = arrLinks.map((item) => {
+    arrLinks.map((item) => {
+      
     const idGif = item.split("-").reverse();
     const url = `https://i.giphy.com/media/${idGif[0]}/giphy.gif`;
+    newLinks.push(url);
     const gifImg = document.createElement("img");
     gifImg.className = "gif"
     gifImg.src = url;
@@ -37,14 +40,26 @@ document.querySelector("#check").addEventListener("click", () => {
 });
 
 document.querySelector("#download").addEventListener("click", () => {
-  let a = document.createElement("a");
-  a.href = "data:application/octet-stream," + encodeURIComponent(newLinks);
-  a.download = "nordvpnaccount.zip";
+ 
+  newLinks.forEach((item, index)=> {
+(async () => {
+  let a = document.createElement('a');
+  let response = await fetch(item);
+  let file = await response.blob();
+  a.download = `giphy${index}`;
+  a.href = window.URL.createObjectURL(file);
+  a.dataset.downloadurl = ['application/octet-stream', a.download, a.href].join(':');
   a.click();
+})();
+  })
 });
+
+
 
 
 
 function isClicked(id) {
   document.querySelector(id).disabled = true;
 }
+
+
